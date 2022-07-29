@@ -1,9 +1,10 @@
+import Login from "../Login/Login";
 import "./App.css"
 
 function App() {
   return (
-    <div>
-      <h1>Spotify</h1>
+    <div className="app">
+      <Login />
     </div>
   );
 }
