@@ -1,11 +1,13 @@
+import { useSelector, useDispatch } from "react-redux"
 import Icons from "../Icons/Icons"
 import Tab from "../Tab/Tab"
 import "./navigation.css"
+import { setCurTab } from '../../slices/UISlice';
 
 export default function Navigation() {
     // Should come from redux later
-    let currentTab = "profile" 
-    
+    // let currentTab = "profile";
+    let currentTab = useSelector(state => state.ui.curTab);
     // Should come from redux later
     let tabs = [
         {
@@ -34,13 +36,18 @@ export default function Navigation() {
             image: null
         }
     ]
-
+    let dispatch = useDispatch();
     const drawTab = (tab) => <Tab
         key={tab.id}
         id={tab.id}
         title={tab.title}
         image={tab.image}
         isSelected={tab.id === currentTab}
+        clickHandler={
+            () => {
+                dispatch(setCurTab(tab.id));
+            }
+        }
     />
 
     return <div className="navigation">
@@ -48,6 +55,7 @@ export default function Navigation() {
         <div className="pages">
             {tabs.map(drawTab)}
         </div>
+
         <Icons name={"github"} height="40px" width="40px" />
     </div>
 }
