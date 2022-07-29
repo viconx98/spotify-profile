@@ -1,5 +1,5 @@
 # Spotify Profile App
-
+test
 We will be creating a Spotify Profile overview app which will fetch a Spotify user's info, recent activity, favorite tracks, favorite artists, and playlists.
 
 You need to use `redux` compulsorily in this project.
