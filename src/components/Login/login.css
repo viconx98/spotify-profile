@@ -9,8 +9,10 @@
 }
 
 .login-main-container button {
-    background-color: rgb(63, 204, 63);
+    background-color: var(--color-spotify);
     color: white;
     padding: 8px 16px;
-    border-radius: 36px;
+    border-radius: 50px;
+    font-size: 10px;
+    letter-spacing: 2px;
 }

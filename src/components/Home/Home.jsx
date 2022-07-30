@@ -1,4 +1,4 @@
-import "./home.css"
+import "./Home.css"
 import Navigation from "../Navigation/Navigation"
 import {
     Routes,

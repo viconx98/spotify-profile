@@ -1,20 +1,39 @@
 .tab {
+    position: relative;
     width: 100%;
     height: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    cursor: pointer;
+    gap: 8px;
+    color: rgb(137, 137, 137);
+    
+}
+.tab p {
+    font-size: 10px;
+    font-family: 'Poppins';
+    font-weight: 500;
+}
+
+.tab img {
+    filter: invert() brightness(0.5);
 }
 
 .selected {
     background-color: #181818;
-    border-left: 6px solid #37b854;    
+    color: white;
 }
 
-.tab img {
-    width: 30px;
-    height: 30px;
-    background-color: gray;
+.selected img {
+    filter: invert();
+}
+
+.border {
+    position: absolute;
+    width: 6px;
+    background-color: var(--color-spotify);
+    height: 100%;
+    left: 0;
 }

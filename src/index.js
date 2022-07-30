@@ -4,14 +4,16 @@ import './index.css';
 import App from './components/App/App';
 import {
   BrowserRouter,
-  Routes,
-  Route,
 } from "react-router-dom";
-// import your route components too
+import { Provider } from "react-redux"
+import spotifyStore from "./spotifyStore"
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={spotifyStore}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
