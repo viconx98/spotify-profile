@@ -9,6 +9,7 @@
     cursor: pointer;
     gap: 8px;
     color: rgb(137, 137, 137);
+    user-select: none;
     
 }
 .tab p {
