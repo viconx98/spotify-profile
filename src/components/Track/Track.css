@@ -1,0 +1,28 @@
+.track {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.track img {
+    width: 40px;
+    height: 40px;
+    background-color: rebeccapurple;
+}
+
+.track-title {
+    flex: 1;
+    font-family: "Poppins";
+    font-size: 14px;
+}
+
+.track-author {
+    font-family: "Poppins";
+    font-size: 14px;
+    color: grey;
+}
+
+.duration {
+    font-size: 14px;
+    color: grey;
+}

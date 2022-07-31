@@ -1,0 +1,40 @@
+.top-artists {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 128px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filters {
+    display: flex;
+    gap: 16px;
+}
+
+.top-artist-list {
+    max-height: 100%;
+    overflow-y: auto;
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 32px;
+}
+
+.filter {
+    color: gray;
+    user-select: none;
+    cursor: pointer;
+}
+
+.selected {
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    /* text-decoration-thickness: 10px; */
+}

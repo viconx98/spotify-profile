@@ -6,6 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import Profile from "../Profile/Profile";
+import TopArtists from "../TopArtists/TopArtists";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />}>
           <Route path="/home/profile" element={<Profile/>} />
-          <Route path="/home/topartists" element={<h1>Top Artists</h1>} />
+          <Route path="/home/topartists" element={<TopArtists/>} />
           <Route path="/home/toptracks" element={<h1>Top Tracks</h1>} />
           <Route path="/home/recent" element={<h1>Recents</h1>} />
           <Route path="/home/playlists" element={<h1>Playlists</h1>} />

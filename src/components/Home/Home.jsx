@@ -1,8 +1,6 @@
 import "./Home.css"
 import Navigation from "../Navigation/Navigation"
 import {
-    Routes,
-    Route,
     Outlet 
 } from "react-router-dom";
 

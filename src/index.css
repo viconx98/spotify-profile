@@ -4,22 +4,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins";
 }
 
 :root {
   --color-spotify: #1DB954;
 }
 
-
-
 body {
   font-family: "Poppins";
-}
-
-img {
-  max-width: 100%;
-  max-height: 100%;
 }
 
 button {
@@ -29,7 +22,6 @@ button {
 li {
   list-style: none;
 }
-
 
 .custom-button {
   font-family: "Poppins";

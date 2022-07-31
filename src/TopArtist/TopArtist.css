@@ -1,0 +1,17 @@
+.top-artist {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.top-artist img {
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    background-color: rebeccapurple;
+}
+.top-artist p{
+    font-family: "Poppins";
+}

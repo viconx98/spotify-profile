@@ -1,5 +1,8 @@
 import "./Artist.css"
 
 export default function Artist({name, image}){
-    return <h1>test</h1>
+    return <div className="artist">
+        <img src="./images/icon_profile.png" alt="" />
+        <p>John Doe</p>
+    </div>
 }
