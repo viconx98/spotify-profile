@@ -1,4 +1,4 @@
-.top-artists {
+.top-tracks {
     width: 100%;
     max-width: 1200px;
     display: flex;
@@ -16,16 +16,6 @@
     gap: 16px;
 }
 
-.top-artist-list {
-    max-height: 100%;
-    overflow-y: auto;
-    margin-top: 32px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 32px;
-}
-
 .filter {
     color: gray;
     user-select: none;
@@ -36,5 +26,14 @@
     color: white;
     text-decoration: underline;
     text-underline-offset: 4px;
-    /* text-decoration-thickness: 10px; */
+}
+
+.top-tracks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 32px;
+    max-height: 100%;
+    overflow-y: auto;
+    padding-right: 16px;
 }

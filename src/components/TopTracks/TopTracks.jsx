@@ -1,12 +1,12 @@
-import TopArtist from "../TopArtist/TopArtist"
-import "./TopArtists.css"
+import "./TopTracks.css"
 import { useSelector, useDispatch } from "react-redux"
-import { setCurrentFilter } from "../../slices/topArtistsSlice"
+import { setCurrentFilter } from "../../slices/topTracksSlice"
+import Track from "../Track/Track"
 
-export default function TopArtists() {
+export default function TopTracks() {
     const dispatch = useDispatch()
-    const {currentFilter} = useSelector(state => state.topArtists)
-    
+    const {currentFilter} = useSelector(state => state.topTracks)
+
     const filters = [
         {
             id: 1,
@@ -27,17 +27,31 @@ export default function TopArtists() {
         return <p className={cls} onClick={e => dispatch(setCurrentFilter(filter.id))}>{filter.title}</p>
     }
 
-    return <div className="top-artists">
+    return <div className="top-tracks">
         <div className="header">
-            <h3>Top Artists</h3>
+            <h3>Top Tracks</h3>
             <div className="filters">
                 {filters.map(drawFilter)}
             </div>
         </div>
 
-        <div className="top-artist-list">
-            <TopArtist/>
-            <TopArtist/>
+        <div className="top-tracks-list">
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
+            <Track/>
         </div>
     </div>
 }
