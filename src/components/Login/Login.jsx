@@ -5,7 +5,7 @@ import SpotifyAPI from '../../spotifyApi';
 export default function Login() {
 
     const attemptLogin = async () => {
-        SpotifyAPI.authorize()
+        window.location.href = SpotifyAPI.getAuthUrl() 
     }
 
     return (
