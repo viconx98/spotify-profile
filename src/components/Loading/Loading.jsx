@@ -1,7 +1,17 @@
+import { useEffect, useRef, useState } from "react"
 import "./Loading.css"
 
-export default function Loading(){
+export default function Loading({text = "Loading"}){
+    let [dots, setDots] = useState("")
+    let intervalId = useRef(null)
+
+    useEffect(() => {
+        intervalId.current = setInterval(() => {
+            setDots(d => d.length === 3 ? "" : d + ".")
+        }, 200)
+    }, [])
+
     return <div className="loading">
-        <h3>Loading...</h3>
+        <h3>{text + dots}</h3>
     </div>
 }

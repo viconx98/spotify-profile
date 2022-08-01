@@ -1,9 +1,18 @@
 .top-tracks {
+    position: relative;
     width: 100%;
-    max-width: 1200px;
+    max-width: 100%;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     padding: 32px 128px;
+}
+
+.top-tracks > .container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    max-height: 100%;
 }
 
 .header {

@@ -1,80 +1,107 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import SpotifyAPI from "../../spotifyApi"
-import Artist from "../Artist/Artist"
-import Track from "../Track/Track"
 import "./Profile.css"
-import { setUser } from "../../slices/profileSlice"
+import { setUser, setUserTopArtists, setUserTopTracks, setIsLoading } from "../../slices/profileSlice"
 import Loading from "../Loading/Loading"
+import { setToken } from "../../slices/authSlice"
+import { useNavigate, browserHistory } from "react-router-dom"
 
 export default function Profile() {
     let dispatch = useDispatch()
+    let navigate = useNavigate()
 
     let { access_token: accessToken } = useSelector(state => state.auth.token)
-    let { user } = useSelector(state => state.profile)
+    let { user, userTopArtists, userTopTracks, isLoading } = useSelector(state => state.profile)
 
-    console.log(user)
-
-    const loadProfile = async () => {
+    const loadUser = async () => {
         let response = await SpotifyAPI.me(accessToken)
-        let userJson = await response.json()
+        let responseJson = await response.json()
 
-        console.log(user, response.status)
         if (response.status === 200) {
-            dispatch(setUser(userJson))
+            dispatch(setUser(responseJson))
+            dispatch(setIsLoading(false))
         }
+    }
+
+    const loadUserTops = async () => {
+        let response = await SpotifyAPI.meTopArtists(accessToken)
+        let responseJson = await response.json()
+
+        if (response.status === 200) {
+            dispatch(setUserTopArtists(responseJson))
+        }
+
+        response = null
+        responseJson = null
+
+        response = await SpotifyAPI.meTopTracks(accessToken)
+        responseJson = await response.json()
+
+        if (response.status === 200) {
+            dispatch(setUserTopTracks(responseJson))
+        }
+
+        dispatch(setIsLoading(false))
+    }
+
+    const logout = () => {
+        dispatch(setToken(null))
+        navigate("/")
     }
 
     useEffect(() => {
         if (user === null) {
-            console.log('hit')
-            // loadProfile()
+            loadUser()
+            loadUserTops()
         }
     }, [])
 
     return <div className="profile">
         {
-            user === null
-            ? <Loading />
-            : <div className="profile-header">
-                <img src="./images/icon_profile.png" alt="" />
-                <p className="username">{user.display_name}</p>
-                <div className="profile-stats">
-                    <p>{user.followers.total}  <br /><span>Followers</span></p>
-                    <p>10  <br /><span>Following</span></p>
-                    <p>10  <br /><span>Playlists</span></p>
-                </div>
-                <button className="custom-button">
-                    Logout
-                </button>
-            </div>
+            isLoading
+                ? <Loading />
+                : <>
+                    <div className="profile-header">
+                        <img src="./images/icon_profile.png" alt="" />
+                        <p className="username">{user.display_name}</p>
+                        <div className="profile-stats">
+                            <p>{user.followers.total}  <br /><span>Followers</span></p>
+                            <p>10  <br /><span>Following</span></p>
+                            <p>10  <br /><span>Playlists</span></p>
+                        </div>
+                        <button className="custom-button" onClick={logout}>
+                            Logout
+                        </button>
+                    </div>
+
+
+                    <div className="tops-container">
+                        <div className="top-section">
+                            <div className="top-header">
+                                <p>Your Top Artists</p>
+                                <button className="custom-button">
+                                    See more
+                                </button>
+                            </div>
+                            <div className="top-list">
+
+                            </div>
+                        </div>
+
+                        <div className="top-section">
+                            <div className="top-header">
+                                <p>Your Top Tracks</p>
+                                <button className="custom-button">
+                                    See more
+                                </button>
+                            </div>
+                            <div className="top-list">
+
+                            </div>
+                        </div>
+                    </div>
+                </>
         }
-
-
-        <div className="tops-container">
-            <div className="top-section">
-                <div className="top-header">
-                    <p>Top Artists Of All Time</p>
-                    <button className="custom-button">
-                        See more
-                    </button>
-                </div>
-                <div className="top-list">
-
-                </div>
-            </div>
-
-            <div className="top-section">
-                <div className="top-header">
-                    <p>Top Artists Of All Time</p>
-                    <button className="custom-button">
-                        See more
-                    </button>
-                </div>
-                <div className="top-list">
-
-                </div>
-            </div>
-        </div>
     </div>
 }

@@ -15,3 +15,8 @@
 .top-artist p{
     font-family: "Poppins";
 }
+
+.artist-link {
+    text-decoration: none;
+    color: white;
+}

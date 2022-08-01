@@ -1,17 +1,31 @@
 import "./Track.css"
 
-export default function Track(){
+export default function Track({track}){
+    console.log(track)
+
+    const parseDuration = (ms) => {
+        let min = 0
+        while((ms - 60000) > 0){
+            ms -= 60000
+            min++
+        }
+        
+        let minStr = min.toString().padStart(2, "0")
+        let secStr = Math.round(ms / 1000).toString().padStart(2, "0")
+        return `${minStr}:${secStr}`
+    }
+
     return <div className="track">
-        <img src="./images/icon_profile.png" alt="" />
-        <p className="track-title">
-            Castle on the hill
+        <img src={track.album.images[2].url} alt="" />
+        <a className="track-title" href={track.external_urls.spotify} target="_blank" >
+            {track.name}
             <br/>
             <span className="track-author">
-            Castle on the hill • Castle on the hill
+            {track.album.artists.map(a => a.name).join(", ")} • {track.album.name}
             </span>
-        </p>
+        </a>
         <p className="duration">
-            3:21
+            {parseDuration(track.duration_ms)}
         </p>
     </div>
 }

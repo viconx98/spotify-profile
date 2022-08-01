@@ -1,12 +1,16 @@
 import TopArtist from "../TopArtist/TopArtist"
 import "./TopArtists.css"
 import { useSelector, useDispatch } from "react-redux"
-import { setCurrentFilter } from "../../slices/topArtistsSlice"
+import { setCurrentFilter, setTopArtists, setIsLoading } from "../../slices/topArtistsSlice"
+import Loading from "../Loading/Loading"
+import { useEffect } from "react"
+import SpotifyAPI from "../../spotifyApi"
 
 export default function TopArtists() {
     const dispatch = useDispatch()
-    const {currentFilter} = useSelector(state => state.topArtists)
-    
+    let { access_token: accessToken } = useSelector(state => state.auth.token)
+    const { topArtists, currentFilter, isLoading } = useSelector(state => state.topArtists)
+
     const filters = [
         {
             id: 1,
@@ -22,22 +26,42 @@ export default function TopArtists() {
         }
     ]
 
+    const loadTopArtists = async () => {
+        let response = await SpotifyAPI.topArtists(accessToken)
+        let responseJson = await response.json()
+
+        console.log(responseJson)
+        dispatch(setTopArtists(responseJson.artists))
+        dispatch(setIsLoading(false))
+    }
+
+    useEffect(() => {
+        setTimeout(loadTopArtists, 2000)
+    }, [])
+
     const drawFilter = (filter) => {
         let cls = filter.id === currentFilter ? "filter filter-selected" : "filter"
         return <p className={cls} onClick={e => dispatch(setCurrentFilter(filter.id))}>{filter.title}</p>
     }
 
-    return <div className="top-artists">
-        <div className="header">
-            <h3>Top Artists</h3>
-            <div className="filters">
-                {filters.map(drawFilter)}
-            </div>
-        </div>
+    const drawArtist = (artist) => <TopArtist key={artist.id} artist={artist}/>
 
-        <div className="top-artist-list">
-            <TopArtist/>
-            <TopArtist/>
-        </div>
+    return <div className="top-artists">
+        {
+            isLoading
+            ? <Loading />
+            : <div className="container">
+                <div className="header">
+                    <h3>Top Artists</h3>
+                    <div className="filters">
+                        {filters.map(drawFilter)}
+                    </div>
+                </div>
+
+                <div className="top-artist-list">
+                    {topArtists.map(drawArtist)}
+                </div>
+            </div>
+        }
     </div>
 }
