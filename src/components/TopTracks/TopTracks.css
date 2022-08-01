@@ -46,3 +46,7 @@
     overflow-y: auto;
     padding-right: 16px;
 }
+
+.top-tracks-list > p {
+    color: grey;
+}

@@ -4,9 +4,10 @@ const profileSlice = createSlice({
     name: "profileSlice",
     initialState: {
         user: null,
-        userTopArtists: null, 
+        userTopArtists: null,
         userTopTracks: null,
-        userExtra: null,
+        userFollowing: 0,
+        userPlaylists: 0,
         isLoading: true
     },
     reducers: {
@@ -27,17 +28,19 @@ const profileSlice = createSlice({
         setIsLoading(state, action) {
             state.isLoading = action.payload
         },
-        
+
         setFollowing(state, action) {
-            state.user.following = action.payload
+            state.userFollowing = action.payload
         },
 
         setPlaylists(state, action) {
-            state.user.playlists = action.payload
+            state.userPlaylists = action.payload
         }
     }
 })
 
-export const { setUser, setUserTopArtists, setUserTopTracks, setIsLoading, setFollowing, setPlaylists } = profileSlice.actions
+export const profileActions = {
+    ...profileSlice.actions
+}
 
 export default profileSlice.reducer

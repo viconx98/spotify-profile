@@ -1,8 +1,13 @@
 const SpotifyAPI = {
     clientId: "13d4952ae4e046d4bf81fb23f41a9399",
-    clientSecret: "7cc2294bf95e484bbd6647d119439e78",
+    clientSecret: "f4b0e234543b45adb4ab479f6947cd1b",
+    token: null,
     redirectUrl: "http://localhost:3000/callback",
-    scopes: ["user-top-read", "user-follow-read", "playlist-read-collaborative", "playlist-read-private"],
+    scopes: ["user-top-read", "user-follow-read", "playlist-read-collaborative", "playlist-read-private", "user-read-recently-played"],
+
+    setToken(token) {
+        this.token = token
+    },
 
     authUrl() {
         let queryParams = new URLSearchParams({
@@ -37,10 +42,10 @@ const SpotifyAPI = {
         return fetch(url, options)
     },
 
-    me(token){
+    me(){
         let url = "https://api.spotify.com/v1/me"
         let headers = {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${this.token.access_token}`,
             "Content-Type": "application/json'"
         }
 
@@ -52,10 +57,10 @@ const SpotifyAPI = {
         return fetch(url, options)
     },
 
-    meFollowing(token){
+    meFollowing(){
         let url = "https://api.spotify.com/v1/me/following?type=artist"
         let headers = {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${this.token.access_token}`,
             "Content-Type": "application/json'"
         }
 
@@ -67,10 +72,10 @@ const SpotifyAPI = {
         return fetch(url, options)
     },
 
-    mePlaylists(token){
+    mePlaylists(){
         let url = "https://api.spotify.com/v1/me/playlists"
         let headers = {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${this.token.access_token}`,
             "Content-Type": "application/json'"
         }
 
@@ -82,10 +87,10 @@ const SpotifyAPI = {
         return fetch(url, options)
     },
 
-    meTopArtists(token){
+    meTopArtists(){
         let url = "https://api.spotify.com/v1/me/top/artists"
         let headers = {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${this.token.access_token}`,
             "Content-Type": "application/json'"
         }
 
@@ -97,10 +102,10 @@ const SpotifyAPI = {
         return fetch(url, options)
     },
 
-    meTopTracks(token){
+    meTopTracks(){
         let url = "https://api.spotify.com/v1/me/top/tracks"
         let headers = {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${this.token.access_token}`,
             "Content-Type": "application/json'"
         }
 
@@ -164,7 +169,13 @@ const SpotifyAPI = {
         }
 
         return fetch(url, options)
+    },
+
+    recents(accessToken) {
+
     }
+
+
 
 }
 

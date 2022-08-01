@@ -11,7 +11,7 @@ const topArtistsSlice = createSlice({
         setCurrentFilter(state, action) {
             state.currentFilter = action.payload
         },
-        setTopArtists(state, action){
+        setTopArtists(state, action) {
             state.topArtists = action.payload
         },
         setIsLoading(state, action) {
@@ -20,6 +20,5 @@ const topArtistsSlice = createSlice({
     }
 })
 
-export const { setCurrentFilter, setIsLoading, setTopArtists } = topArtistsSlice.actions
-
+export const topArtistsActions = { ...topArtistsSlice.actions }
 export default topArtistsSlice.reducer

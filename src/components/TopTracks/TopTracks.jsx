@@ -1,15 +1,14 @@
 import "./TopTracks.css"
 import { useSelector, useDispatch } from "react-redux"
-import { setCurrentFilter, setTopTracks, setIsLoading } from "../../slices/topTracksSlice"
+import { topTracksActions } from "../../slices/topTracksSlice"
 import Track from "../Track/Track"
 import Loading from "../Loading/Loading"
-import SpotifyAPI from "../../spotifyApi"
 import { useEffect } from "react"
+import { getUserTopTracksMain } from "../../slices/apiSlice"
 
 
 export default function TopTracks() {
     const dispatch = useDispatch()
-    let { access_token: accessToken } = useSelector(state => state.auth.token)
     const { topTracks, currentFilter, isLoading } = useSelector(state => state.topTracks)
 
     const filters = [
@@ -27,42 +26,41 @@ export default function TopTracks() {
         }
     ]
 
-    const loadTopTracks = async () => {
-        let response = await SpotifyAPI.topTracks(accessToken)
-        let jsonResponse = await response.json()
-
-        console.log(jsonResponse)
-        dispatch(setTopTracks(jsonResponse.tracks))
-        dispatch(setIsLoading(false))
-    }
-
     useEffect(() => {
-        setTimeout(loadTopTracks, 2000)
+        console.log("useEffect > TopTracks")
+        if (topTracks === null){
+            dispatch(getUserTopTracksMain())
+        }
+        // eslint-disable-next-line
     }, [])
-    
-    const drawTrack = (track) => <Track key={track.id} track={track}/>
+
+    const drawTrack = (track) => <Track key={track.id} track={track} />
 
     const drawFilter = (filter) => {
         let cls = filter.id === currentFilter ? "filter filter-selected" : "filter"
-        return <p className={cls} onClick={e => dispatch(setCurrentFilter(filter.id))}>{filter.title}</p>
+        return <p key={filter.id} className={cls} onClick={e => dispatch(topTracksActions.setCurrentFilter(filter.id))}>{filter.title}</p>
     }
 
     return <div className="top-tracks">
         {
             isLoading
-            ? <Loading />
-            : <div className="container">
-                <div className="header">
-                    <h3>Top Tracks</h3>
-                    <div className="filters">
-                        {filters.map(drawFilter)}
+                ? <Loading />
+                : <div className="container">
+                    <div className="header">
+                        <h3>Top Tracks</h3>
+                        <div className="filters">
+                            {filters.map(drawFilter)}
+                        </div>
+                    </div>
+
+                    <div className="top-tracks-list">
+                        {
+                            topTracks.length === 0
+                                ? <p> You don't have any top tracks </p>
+                                : topTracks.map(drawTrack)
+                        }
                     </div>
                 </div>
-
-                <div className="top-tracks-list">
-                    {topTracks.map(drawTrack)}
-                </div>
-            </div>
         }
     </div>
 }

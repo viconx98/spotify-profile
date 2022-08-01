@@ -91,3 +91,7 @@
     flex-direction: column;
     gap: 20px;
 }
+
+.top-list > p {
+    color: grey;
+}

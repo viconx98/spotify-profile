@@ -12,8 +12,8 @@ import spotifyStore from "./spotifyStore"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={spotifyStore}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
   </Provider>
 );

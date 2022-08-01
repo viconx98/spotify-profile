@@ -1,23 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Login.css';
-import SpotifyAPI from '../../spotifyApi';
-import { useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom"
+import { authUrl } from '../../slices/apiSlice';
+
 
 export default function Login() {
-    let navigate = useNavigate()
-    const { token } = useSelector(state => state.auth)
-
     const attemptLogin = async () => {
-        window.location.href = SpotifyAPI.authUrl()
+        window.location.href = authUrl()
     }
-
-    useEffect(() => {
-        // TODO: Check for refresh
-        if (token !== null) {
-            navigate("/home/profile")
-        }
-    }, [])
 
     return (
         <div className="login-main-container">

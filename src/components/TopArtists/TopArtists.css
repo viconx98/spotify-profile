@@ -34,6 +34,10 @@
     gap: 32px;
 }
 
+.top-artist-list > p {
+    color: grey;
+}
+
 .filter {
     color: gray;
     user-select: none;

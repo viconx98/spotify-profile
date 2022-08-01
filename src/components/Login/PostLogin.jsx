@@ -1,31 +1,28 @@
 import "./PostLogin.css"
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setToken } from "../../slices/authSlice"
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import SpotifyAPI from "../../spotifyApi";
+import { exchangeCode } from "../../slices/apiSlice"
+
 
 export default function PostLogin() {
-    let dispatch = useDispatch()
     let navigate = useNavigate()
+    let dispatch = useDispatch()
+    let {isAuthComplete} = useSelector(state => state.api)
     let [queryParams, setQueryParams] = useSearchParams()
 
-    const exchangeCode = async () => {
-        let accessCode = queryParams.get("code")
-
-        let response = await SpotifyAPI.authorize(accessCode)
-        let token = await response.json()
-
-        if (response.status === 200){
-            dispatch(setToken(token))
-            localStorage.setItem("token", JSON.stringify(token))
+    const attemptExchangeCode = async () => {
+        if (isAuthComplete) {
             navigate("/home/profile")
+        } else {
+            let accessCode = queryParams.get("code")
+            dispatch(exchangeCode(accessCode))
         }
     }
 
     useEffect(() => {
-        exchangeCode()
-    }, [])
+        attemptExchangeCode()
+    }, [isAuthComplete])
 
     return <div className="post-login">
         <h3>Logging in...</h3>

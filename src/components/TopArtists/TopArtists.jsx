@@ -1,14 +1,14 @@
 import TopArtist from "../TopArtist/TopArtist"
 import "./TopArtists.css"
 import { useSelector, useDispatch } from "react-redux"
-import { setCurrentFilter, setTopArtists, setIsLoading } from "../../slices/topArtistsSlice"
 import Loading from "../Loading/Loading"
 import { useEffect } from "react"
-import SpotifyAPI from "../../spotifyApi"
+import { getUserTopArtistsMain } from "../../slices/apiSlice"
+import { topArtistsActions } from "../../slices/topArtistsSlice"
+
 
 export default function TopArtists() {
     const dispatch = useDispatch()
-    let { access_token: accessToken } = useSelector(state => state.auth.token)
     const { topArtists, currentFilter, isLoading } = useSelector(state => state.topArtists)
 
     const filters = [
@@ -26,25 +26,20 @@ export default function TopArtists() {
         }
     ]
 
-    const loadTopArtists = async () => {
-        let response = await SpotifyAPI.topArtists(accessToken)
-        let responseJson = await response.json()
-
-        console.log(responseJson)
-        dispatch(setTopArtists(responseJson.artists))
-        dispatch(setIsLoading(false))
-    }
-
     useEffect(() => {
-        setTimeout(loadTopArtists, 2000)
+        console.log("useEffect > TopArtists")
+        if (topArtists === null){
+            dispatch(getUserTopArtistsMain())
+        }
+        // eslint-disable-next-line
     }, [])
 
     const drawFilter = (filter) => {
         let cls = filter.id === currentFilter ? "filter filter-selected" : "filter"
-        return <p className={cls} onClick={e => dispatch(setCurrentFilter(filter.id))}>{filter.title}</p>
+        return <p key={filter.id} className={cls} onClick={e => dispatch(topArtistsActions.setCurrentFilter(filter.id))}>{filter.title}</p>
     }
 
-    const drawArtist = (artist) => <TopArtist key={artist.id} artist={artist}/>
+    const drawArtist = (artist) => <TopArtist key={artist.id} artist={artist} />
 
     return <div className="top-artists">
         {
@@ -59,7 +54,11 @@ export default function TopArtists() {
                 </div>
 
                 <div className="top-artist-list">
-                    {topArtists.map(drawArtist)}
+                    {
+                        topArtists.length === 0
+                            ? <p> You don't have any top artists </p>
+                            : topArtists.map(drawArtist)
+                    }
                 </div>
             </div>
         }

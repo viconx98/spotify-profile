@@ -20,6 +20,5 @@ const topTracksSlice = createSlice({
     }
 })
 
-export const { setCurrentFilter, setTopTracks,  setIsLoading} = topTracksSlice.actions
-
+export const topTracksActions = {...topTracksSlice.actions}
 export default topTracksSlice.reducer
