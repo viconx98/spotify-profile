@@ -2,7 +2,7 @@ const SpotifyAPI = {
     clientId: "13d4952ae4e046d4bf81fb23f41a9399",
     clientSecret: "7cc2294bf95e484bbd6647d119439e78",
     redirectUrl: "http://localhost:3000/callback",
-    scopes: ["user-top-read"],
+    scopes: ["user-top-read", "user-follow-read", "playlist-read-collaborative", "playlist-read-private"],
 
     authUrl() {
         let queryParams = new URLSearchParams({
@@ -39,6 +39,36 @@ const SpotifyAPI = {
 
     me(token){
         let url = "https://api.spotify.com/v1/me"
+        let headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json'"
+        }
+
+        let options = {
+            method: "GET",
+            headers: headers
+        }
+
+        return fetch(url, options)
+    },
+
+    meFollowing(token){
+        let url = "https://api.spotify.com/v1/me/following?type=artist"
+        let headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json'"
+        }
+
+        let options = {
+            method: "GET",
+            headers: headers
+        }
+
+        return fetch(url, options)
+    },
+
+    mePlaylists(token){
+        let url = "https://api.spotify.com/v1/me/playlists"
         let headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json'"

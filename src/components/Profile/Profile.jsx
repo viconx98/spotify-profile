@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import SpotifyAPI from "../../spotifyApi"
 import "./Profile.css"
-import { setUser, setUserTopArtists, setUserTopTracks, setIsLoading } from "../../slices/profileSlice"
+import { setUser, setUserTopArtists, setUserTopTracks, setIsLoading, setFollowing, setPlaylists } from "../../slices/profileSlice"
 import Loading from "../Loading/Loading"
 import { setToken } from "../../slices/authSlice"
 import { useNavigate, browserHistory } from "react-router-dom"
@@ -45,6 +45,18 @@ export default function Profile() {
         dispatch(setIsLoading(false))
     }
 
+    const loadUserStats = async () => {
+        let response = await SpotifyAPI.meFollowing(accessToken)
+        let responseJson = await response.json()
+
+        dispatch(setFollowing(responseJson.artists.total))
+        
+        response = await SpotifyAPI.mePlaylists(accessToken)
+        responseJson = await response.json()
+        
+        dispatch(setPlaylists(responseJson.total))
+    }
+
     const logout = () => {
         dispatch(setToken(null))
         navigate("/")
@@ -54,6 +66,7 @@ export default function Profile() {
         if (user === null) {
             loadUser()
             loadUserTops()
+            loadUserStats()
         }
     }, [])
 
@@ -67,8 +80,8 @@ export default function Profile() {
                         <p className="username">{user.display_name}</p>
                         <div className="profile-stats">
                             <p>{user.followers.total}  <br /><span>Followers</span></p>
-                            <p>10  <br /><span>Following</span></p>
-                            <p>10  <br /><span>Playlists</span></p>
+                            <p>{user.following}  <br /><span>Following</span></p>
+                            <p>{user.playlists}  <br /><span>Playlists</span></p>
                         </div>
                         <button className="custom-button" onClick={logout}>
                             Logout
