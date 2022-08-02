@@ -1,11 +1,11 @@
 import "./Playlist.css"
 
-export default function Playlist(){
+export default function Playlist({playlist}){
 
     return <div className="playlist">
-        <img src="https://raw.githubusercontent.com/viconx98/spotify-profile/master/screenshots/5.png" alt="" />
-        <p className="playlist-title">Test</p>
-        <p className="track-count">3 Tracks</p>
+        <img src={playlist.images[0].url} alt="" />
+        <p className="playlist-title">{playlist.name}</p>
+        <p className="track-count">{playlist.tracks.total} Tracks   </p>
     </div>
 }
 

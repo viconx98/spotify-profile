@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import Loading from "../Loading/Loading"
 import Playlist from "../Playlist/Playlist"
 import { useEffect } from "react"
-import { getUserPlaylists } from "../../slices/apiSlice"
+import { playlistAsyncActions } from "../../slices/playlistSlice"
 
 export default function Playlists() {
     const dispatch = useDispatch()
@@ -11,11 +11,13 @@ export default function Playlists() {
 
     useEffect(() => {
         if (playlists === null){
-            dispatch(getUserPlaylists())
+            dispatch(playlistAsyncActions.getUserPlaylists())
         }
 
         console.log(playlists)
     }, [])
+
+    const drawPlaylist = (playlist) => <Playlist key={playlist.id} playlist={playlist}/>
 
     return <div className="playlists">
         {
@@ -24,12 +26,7 @@ export default function Playlists() {
             : <div className="container">
                 <h3>Your Playlists</h3>
                 <div className="playlist-list">
-                    <Playlist />
-                    <Playlist />
-                    <Playlist />
-                    <Playlist />
-                    <Playlist />
-
+                    {playlists.map(drawPlaylist)}
                 </div>
             </div>
         }

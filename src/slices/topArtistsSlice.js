@@ -1,4 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { requestHeaders, requestOptions } from "./apiSlice"
+
+
+const getUserTopArtistsMain = createAsyncThunk(
+    "topArtistsSlice/getUserTopArtistsMain",
+    async (_, { getState, dispatch }) => {
+        let { token } = getState().api
+
+        let url = "https://api.spotify.com/v1/me/top/artists"
+
+        let headers = requestHeaders(token.access_token)
+        let options = requestOptions(headers)
+
+        let response = await fetch(url, options)
+        let responseJson = await response.json()
+
+        return {
+            status: response.status,
+            data: responseJson.items
+        }
+    }
+)
 
 const topArtistsSlice = createSlice({
     name: "topArtistsSlice",
@@ -17,8 +39,22 @@ const topArtistsSlice = createSlice({
         setIsLoading(state, action) {
             state.isLoading = action.payload
         }
+    },
+    extraReducers: (builder) => {
+        // Get User Top Artists
+        builder.addCase(getUserTopArtistsMain.pending, (state, action) => {
+            state.isLoading = true
+        })
+        builder.addCase(getUserTopArtistsMain.fulfilled, (state, action) => {
+            state.topArtists = action.payload.data
+            state.isLoading = false
+        })
     }
 })
 
 export const topArtistsActions = { ...topArtistsSlice.actions }
+
+export const topArtistsAsyncActions = {
+    getUserTopArtistsMain,
+}
 export default topArtistsSlice.reducer

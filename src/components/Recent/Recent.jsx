@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import Loading from "../Loading/Loading"
 import Track from "../Track/Track"
 import "./Recent.css"
-import { getUserRecentTracks } from "../../slices/apiSlice"
+import { recentAsyncActions } from "../../slices/recentSlice"
 
 const tempTrack = {
     album: {
@@ -24,7 +24,7 @@ export default function Recent() {
 
     useEffect(() => {
         if (recents === null) {
-            dispatch(getUserRecentTracks())
+            dispatch(recentAsyncActions.getUserRecentTracks())
         }
     }, [])
 
@@ -39,8 +39,8 @@ export default function Recent() {
                     <div className="recent-track-list">
                         {
                             recents.length === 0
-                            ? <p>You have no recently played tracks</p>
-                            : recents.map(drawTrack)
+                                ? <p>You have no recently played tracks</p>
+                                : recents.map(drawTrack)
                         }
                     </div>
                 </div>

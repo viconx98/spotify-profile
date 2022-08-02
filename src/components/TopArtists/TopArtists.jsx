@@ -3,8 +3,7 @@ import "./TopArtists.css"
 import { useSelector, useDispatch } from "react-redux"
 import Loading from "../Loading/Loading"
 import { useEffect } from "react"
-import { getUserTopArtistsMain } from "../../slices/apiSlice"
-import { topArtistsActions } from "../../slices/topArtistsSlice"
+import { topArtistsActions, topArtistsAsyncActions } from "../../slices/topArtistsSlice"
 
 
 export default function TopArtists() {
@@ -29,7 +28,7 @@ export default function TopArtists() {
     useEffect(() => {
         console.log("useEffect > TopArtists")
         if (topArtists === null){
-            dispatch(getUserTopArtistsMain())
+            dispatch(topArtistsAsyncActions.getUserTopArtistsMain())
         }
         // eslint-disable-next-line
     }, [])

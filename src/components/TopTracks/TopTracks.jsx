@@ -1,11 +1,9 @@
 import "./TopTracks.css"
 import { useSelector, useDispatch } from "react-redux"
-import { topTracksActions } from "../../slices/topTracksSlice"
+import { topTracksActions, topTracksAsyncActions } from "../../slices/topTracksSlice"
 import Track from "../Track/Track"
 import Loading from "../Loading/Loading"
 import { useEffect } from "react"
-import { getUserTopTracksMain } from "../../slices/apiSlice"
-
 
 export default function TopTracks() {
     const dispatch = useDispatch()
@@ -29,7 +27,7 @@ export default function TopTracks() {
     useEffect(() => {
         console.log("useEffect > TopTracks")
         if (topTracks === null){
-            dispatch(getUserTopTracksMain())
+            dispatch(topTracksAsyncActions.getUserTopTracksMain())
         }
         // eslint-disable-next-line
     }, [])

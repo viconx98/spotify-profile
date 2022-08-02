@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import "./Profile.css"
 import Loading from "../Loading/Loading"
 import Artist from "../Artist/Artist"
-import { getUser, getUserTopArtists, getUserTopTracks, getUserStats } from "../../slices/apiSlice"
+import { profileAsyncActions } from "../../slices/profileSlice"
 import { useNavigate } from "react-router-dom"
 
 import Track from "../Track/Track"
@@ -19,15 +19,13 @@ export default function Profile() {
         navigate("/")
     }
 
-    console.log(user)
-
     useEffect(() => {
         console.log("useEffect > Profile")
         if (user === null) {
-            dispatch(getUser())
-            dispatch(getUserTopArtists())
-            dispatch(getUserTopTracks())
-            dispatch(getUserStats())
+            dispatch(profileAsyncActions.getUser())
+            dispatch(profileAsyncActions.getUserTopArtists())
+            dispatch(profileAsyncActions.getUserTopTracks())
+            dispatch(profileAsyncActions.getUserStats())
         }
     }, [])
 
