@@ -20,3 +20,25 @@
     flex-direction: column;
     width: 100%;
 }
+
+.nav-icon {
+    display: block;
+}
+
+@media screen and (max-width: 769px) {
+    .nav-icon {
+        display: none;
+    }
+
+    .navigation {
+        width: 100%;
+        max-width: 100%;
+        height: 80px;
+        max-height: 80px;
+        padding: 0px;
+    }
+
+    .pages {
+        flex-direction: row;
+    }
+}

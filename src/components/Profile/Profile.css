@@ -103,3 +103,7 @@
 .top-list > p {
     color: grey;
 }
+
+@media screen and (max-width: 769px) {
+    
+}

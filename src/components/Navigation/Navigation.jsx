@@ -45,10 +45,10 @@ export default function Navigation() {
     />
 
     return <div className="navigation">
-        <Icons name={"spotify"} height="50px" width="50px" />
+        <div className="nav-icon"><Icons name={"spotify"} height="50px" width="50px" /></div>
         <div className="pages">
             {tabs.map(drawTab)}
         </div>
-        <Icons name={"github"} height="40px" width="40px" />
+        <div className="nav-icon"><Icons name={"github"} height="40px" width="40px" /></div>
     </div>
 }
