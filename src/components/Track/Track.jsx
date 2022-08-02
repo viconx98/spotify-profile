@@ -1,18 +1,9 @@
 import "./Track.css"
 
 export default function Track({ track }) {
-    let temp = {
-        album: {
-            images: [1, 2, "test"],
-            artists: [],
-            name: "album"
-        },
-        external_urls: {
-            spotify: "www.example.com"
-        },
-        name: "Test",
-        duration_ms: 100000
-    }
+
+    console.log(track)
+    
     const parseDuration = (ms) => {
         let min = 0
         while ((ms - 60000) > 0) {

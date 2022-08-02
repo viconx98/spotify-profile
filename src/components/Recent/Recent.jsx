@@ -28,7 +28,7 @@ export default function Recent() {
         }
     }, [])
 
-    const drawTrack = (track) => <Track key={track.id} track={track} />
+    const drawTrack = (item) => <Track key={item.track.id} track={item.track} />
 
     return <div className="recent">
         {
