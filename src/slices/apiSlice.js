@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { profileActions } from "./profileSlice"
 import { topArtistsActions } from "./topArtistsSlice"
 import { topTracksActions } from "./topTracksSlice"
+import { recentActions } from "./recentSlice"
+import { playlistActions } from "./playlistSlice"
 
 let initialToken = JSON.parse(localStorage.getItem("token")) || null
 let initialAuth = initialToken !== null
@@ -59,7 +61,7 @@ const exchangeCode = createAsyncThunk(
 // Profile
 const getUser = createAsyncThunk(
     "apiSlice/getUser",
-    async (code, { getState, dispatch }) => {
+    async (_, { getState, dispatch }) => {
         dispatch(profileActions.setIsLoading(true))
         let { token } = getState().api
         let url = "https://api.spotify.com/v1/me"
@@ -183,7 +185,7 @@ const getUserTopArtistsMain = createAsyncThunk(
 // Top Tracks
 const getUserTopTracksMain = createAsyncThunk(
     "apiSlice/getUserTopArtistsMain",
-    async (code, { getState, dispatch }) => {
+    async (_, { getState, dispatch }) => {
         dispatch(topTracksActions.setIsLoading(true))
         let { token } = getState().api
         // Top Artists
@@ -206,12 +208,52 @@ const getUserTopTracksMain = createAsyncThunk(
     }
 )
 
+// Recents
+const getUserRecentTracks = createAsyncThunk(
+    "apiSlice/getUserRecentTracks",
+    async (_, { getState, dispatch }) => {
+        dispatch(recentActions.setIsLoading(true))
+        let { token } = getState().api
+        let url = "https://api.spotify.com/v1/me/player/recently-played"
+
+        let headers = requestHeaders(token.access_token)
+        let options = requestOptions(headers)
+
+        let response = await fetch(url, options)
+        let responseJson = await response.json()
+
+        dispatch(recentActions.setRecents(responseJson.items))
+        dispatch(recentActions.setIsLoading(false))
+    }
+)
+
+// Playlists
+const getUserPlaylists = createAsyncThunk(
+    "apiSlice/getUserPlaylists",
+    async (_, { getState, dispatch }) => {
+        dispatch(playlistActions.setIsLoading(true))
+
+        let { token } = getState().api
+
+        let url = `https://api.spotify.com/v1/me/playlists`
+
+        let headers = requestHeaders(token.access_token)
+        let options = requestOptions(headers)
+
+        let response = await fetch(url, options)
+        let responseJson = await response.json()
+
+        dispatch(playlistActions.setPlaylists(responseJson.items))
+        dispatch(playlistActions.setIsLoading(false))
+    }
+)
+
 const apiSlice = createSlice({
     name: "apiSlice",
     initialState: {
         redirectUri: "http://localhost:3000/callback",
         clientId: "13d4952ae4e046d4bf81fb23f41a9399",
-        clientSecret: "f4b0e234543b45adb4ab479f6947cd1b",
+        clientSecret: "",
         token: initialToken,
         isAuthComplete: initialAuth
     },
@@ -250,5 +292,5 @@ export function authUrl() {
     return "https://accounts.spotify.com/authorize?" + queryParams.toString()
 }
 
-export { setToken, exchangeCode, getUser, getUserTopArtists, getUserTopTracks, getUserStats, getUserTopArtistsMain, getUserTopTracksMain }
+export { setToken, exchangeCode, getUser, getUserTopArtists, getUserTopTracks,getUserPlaylists, getUserStats, getUserTopArtistsMain, getUserTopTracksMain, getUserRecentTracks }
 export default apiSlice.reducer

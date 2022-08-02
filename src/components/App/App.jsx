@@ -9,6 +9,8 @@ import Profile from "../Profile/Profile";
 import TopArtists from "../TopArtists/TopArtists";
 import TopTracks from "../TopTracks/TopTracks";
 import PostLogin from "../Login/PostLogin";
+import Recent from "../Recent/Recent";
+import Playlists from "../Playlists/Playlists";
 
 function App() {
   return (
@@ -20,8 +22,8 @@ function App() {
           <Route path="/home/profile" element={<Profile/>} />
           <Route path="/home/topartists" element={<TopArtists/>} />
           <Route path="/home/toptracks" element={<TopTracks/>} />
-          <Route path="/home/recent" element={<h1>Recents</h1>} />
-          <Route path="/home/playlists" element={<h1>Playlists</h1>} />
+          <Route path="/home/recent" element={<Recent/>} />
+          <Route path="/home/playlists" element={<Playlists/>} />
         </Route>
       </Routes>
     </div>

@@ -1,0 +1,31 @@
+.recent {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 128px;
+}
+
+.recent > .container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    max-height: 100%;
+}
+
+.recent-track-list{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 32px;
+    max-height: 100%;
+    overflow-y: auto;
+    padding-right: 16px;
+
+}
+
+.recent-track-list > p {
+    color: grey;
+}

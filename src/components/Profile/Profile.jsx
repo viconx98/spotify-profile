@@ -19,6 +19,8 @@ export default function Profile() {
         navigate("/")
     }
 
+    console.log(user)
+
     useEffect(() => {
         console.log("useEffect > Profile")
         if (user === null) {
