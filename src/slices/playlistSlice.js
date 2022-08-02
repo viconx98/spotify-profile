@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { requestHeaders, requestOptions } from "./apiSlice"
+import { requestHeaders, requestOptions } from "./authSlice"
 
 const getUserPlaylists = createAsyncThunk(
     "playlistSlice/getUserPlaylists",
-    async (_, { getState, dispatch }) => {
-        let { token } = getState().api
+    async (_, { getState }) => {
+        let { token } = getState().auth
 
         let url = `https://api.spotify.com/v1/me/playlists`
 

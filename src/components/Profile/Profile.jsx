@@ -20,7 +20,6 @@ export default function Profile() {
     }
 
     useEffect(() => {
-        console.log("useEffect > Profile")
         if (user === null) {
             dispatch(profileAsyncActions.getUser())
             dispatch(profileAsyncActions.getUserTopArtists())
@@ -32,56 +31,56 @@ export default function Profile() {
     return <div className="profile">
         {
             isLoading
-                ? <Loading />
-                : <>
-                    <div className="profile-header">
-                        <img src="./images/icon_profile.png" alt="" />
-                        <p className="username">{user.display_name}</p>
-                        <div className="profile-stats">
-                            <p>{user.followers.total}  <br /><span>Followers</span></p>
-                            <p>{userFollowing}  <br /><span>Following</span></p>
-                            <p>{userPlaylists}  <br /><span>Playlists</span></p>
+            ? <Loading />
+            : <div className="container">
+                <div className="profile-header">
+                    <img src="./images/icon_profile.png" alt="" />
+                    <p className="username">{user.display_name}</p>
+                    <div className="profile-stats">
+                        <p>{user.followers.total}  <br /><span>Followers</span></p>
+                        <p>{userFollowing}  <br /><span>Following</span></p>
+                        <p>{userPlaylists}  <br /><span>Playlists</span></p>
+                    </div>
+                    <button className="custom-button" onClick={logout}>
+                        Logout
+                    </button>
+                </div>
+
+
+                <div className="tops-container">
+                    <div className="top-section">
+                        <div className="top-header">
+                            <p>Your Top Artists</p>
+                            <button className="custom-button">
+                                See more
+                            </button>
                         </div>
-                        <button className="custom-button" onClick={logout}>
-                            Logout
-                        </button>
+                        <div className="top-list">
+                            {
+                                userTopArtists.length === 0
+                                    ? <p>You don't have any top artists</p>
+                                    : userTopTracks.map(<Artist />)
+                            }
+                        </div>
                     </div>
 
-
-                    <div className="tops-container">
-                        <div className="top-section">
-                            <div className="top-header">
-                                <p>Your Top Artists</p>
-                                <button className="custom-button">
-                                    See more
-                                </button>
-                            </div>
-                            <div className="top-list">
-                                {
-                                    userTopArtists.length === 0
-                                        ? <p>You don't have any top artists</p>
-                                        : userTopTracks.map(<Artist />)
-                                }
-                            </div>
+                    <div className="top-section">
+                        <div className="top-header">
+                            <p>Your Top Tracks</p>
+                            <button className="custom-button">
+                                See more
+                            </button>
                         </div>
-
-                        <div className="top-section">
-                            <div className="top-header">
-                                <p>Your Top Tracks</p>
-                                <button className="custom-button">
-                                    See more
-                                </button>
-                            </div>
-                            <div className="top-list">
-                                {
-                                    userTopArtists.length === 0
-                                        ? <p>You don't have any top tracks</p>
-                                        : userTopTracks.map(<Track />)
-                                }
-                            </div>
+                        <div className="top-list">
+                            {
+                                userTopArtists.length === 0
+                                    ? <p>You don't have any top tracks</p>
+                                    : userTopTracks.map(<Track />)
+                            }
                         </div>
                     </div>
-                </>
+                </div>
+            </div>
         }
     </div>
 }

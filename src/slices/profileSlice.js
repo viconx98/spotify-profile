@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { requestHeaders, requestOptions } from "./apiSlice"
+import { requestHeaders, requestOptions } from "./authSlice"
 
 
 const getUser = createAsyncThunk(
     "profileSlice/getUser",
-    async (_, { getState, dispatch }) => {
-        let { token } = getState().api
+    async (_, { getState }) => {
+        let { token } = getState().auth
         let url = "https://api.spotify.com/v1/me"
 
         let headers = requestHeaders(token.access_token)
@@ -23,8 +23,8 @@ const getUser = createAsyncThunk(
 
 const getUserTopArtists = createAsyncThunk(
     "profileSlice/getUserTopArtists",
-    async (code, { getState, dispatch }) => {
-        let { token } = getState().api
+    async (code, { getState }) => {
+        let { token } = getState().auth
         // Top Artists
         let url = "https://api.spotify.com/v1/me/top/artists"
 
@@ -43,8 +43,8 @@ const getUserTopArtists = createAsyncThunk(
 
 const getUserTopTracks = createAsyncThunk(
     "profileSlice/getUserTopTracks",
-    async (code, { getState, dispatch }) => {
-        let { token } = getState().api
+    async (code, { getState }) => {
+        let { token } = getState().auth
         // Top Artists
         let url = "https://api.spotify.com/v1/me/top/tracks"
 
@@ -63,8 +63,8 @@ const getUserTopTracks = createAsyncThunk(
 
 const getUserStats = createAsyncThunk(
     "profileSlice/getUserStats",
-    async (_, { getState, dispatch }) => {
-        let { token } = getState().api
+    async (_, { getState }) => {
+        let { token } = getState().auth
 
         let data = {
             following: 0,

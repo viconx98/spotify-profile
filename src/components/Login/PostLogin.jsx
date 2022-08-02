@@ -2,13 +2,13 @@ import "./PostLogin.css"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { exchangeCode } from "../../slices/apiSlice"
+import { exchangeCode } from "../../slices/authSlice"
 
 
 export default function PostLogin() {
     let navigate = useNavigate()
     let dispatch = useDispatch()
-    let {isAuthComplete} = useSelector(state => state.api)
+    let {isAuthComplete} = useSelector(state => state.auth)
     let [queryParams, setQueryParams] = useSearchParams()
 
     const attemptExchangeCode = async () => {

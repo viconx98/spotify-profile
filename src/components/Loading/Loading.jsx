@@ -9,6 +9,8 @@ export default function Loading({text = "Loading"}){
         intervalId.current = setInterval(() => {
             setDots(d => d.length === 3 ? "" : d + ".")
         }, 200)
+
+        return () => clearInterval(intervalId.current)
     }, [])
 
     return <div className="loading">

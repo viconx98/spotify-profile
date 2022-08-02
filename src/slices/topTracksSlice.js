@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { requestHeaders, requestOptions } from "./apiSlice"
+import { requestHeaders, requestOptions } from "./authSlice"
 
 
 const getUserTopTracksMain = createAsyncThunk(
     "topTracksSlice/getUserTopArtistsMain",
-    async (_, { getState, dispatch }) => {
-        let { token } = getState().api
-        let url = "https://api.spotify.com/v1/me/top/tracks"
+    async (filter = "long_term", { getState }) => {
+        let { token } = getState().auth
+        let url = `https://api.spotify.com/v1/me/top/tracks?time_range=${filter}`
 
         let headers = requestHeaders(token.access_token)
         let options = requestOptions(headers)
@@ -24,7 +24,7 @@ const getUserTopTracksMain = createAsyncThunk(
 const topTracksSlice = createSlice({
     name: "topTracksSlice",
     initialState: {
-        currentFilter: 1,
+        currentFilter: 'long_term',
         isLoading: true,
         topTracks: null
     },

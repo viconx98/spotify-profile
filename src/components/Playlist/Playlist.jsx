@@ -3,7 +3,7 @@ import "./Playlist.css"
 export default function Playlist({playlist}){
 
     return <div className="playlist">
-        <img src={playlist.images[0].url} alt="" />
+        <a href={playlist.external_urls.spotify} target="_blank"><img src={playlist.images[0].url} alt="" /></a>
         <p className="playlist-title">{playlist.name}</p>
         <p className="track-count">{playlist.tracks.total} Tracks   </p>
     </div>

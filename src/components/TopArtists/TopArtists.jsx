@@ -12,30 +12,34 @@ export default function TopArtists() {
 
     const filters = [
         {
-            id: 1,
+            id: 'long_term',
             title: "All time"
         },
         {
-            id: 2,
+            id: "medium_term",
             title: "Last 6 Months"
         },
         {
-            id: 3,
+            id: "short_term",
             title: "Last Month"
         }
     ]
 
     useEffect(() => {
-        console.log("useEffect > TopArtists")
         if (topArtists === null){
             dispatch(topArtistsAsyncActions.getUserTopArtistsMain())
         }
         // eslint-disable-next-line
     }, [])
+    
+    const applyFilter = (filterId) => {
+        dispatch(topArtistsAsyncActions.getUserTopArtistsMain(filterId))
+        dispatch(topArtistsActions.setCurrentFilter(filterId))
+    }
 
     const drawFilter = (filter) => {
         let cls = filter.id === currentFilter ? "filter filter-selected" : "filter"
-        return <p key={filter.id} className={cls} onClick={e => dispatch(topArtistsActions.setCurrentFilter(filter.id))}>{filter.title}</p>
+        return <p key={filter.id} className={cls} onClick={e => applyFilter(filter.id)}>{filter.title}</p>
     }
 
     const drawArtist = (artist) => <TopArtist key={artist.id} artist={artist} />

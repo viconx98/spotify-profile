@@ -13,8 +13,6 @@ export default function Playlists() {
         if (playlists === null){
             dispatch(playlistAsyncActions.getUserPlaylists())
         }
-
-        console.log(playlists)
     }, [])
 
     const drawPlaylist = (playlist) => <Playlist key={playlist.id} playlist={playlist}/>

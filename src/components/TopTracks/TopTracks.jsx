@@ -11,21 +11,20 @@ export default function TopTracks() {
 
     const filters = [
         {
-            id: 1,
+            id: 'long_term',
             title: "All time"
         },
         {
-            id: 2,
+            id: "medium_term",
             title: "Last 6 Months"
         },
         {
-            id: 3,
+            id: "short_term",
             title: "Last Month"
         }
     ]
 
     useEffect(() => {
-        console.log("useEffect > TopTracks")
         if (topTracks === null){
             dispatch(topTracksAsyncActions.getUserTopTracksMain())
         }
@@ -34,9 +33,14 @@ export default function TopTracks() {
 
     const drawTrack = (track) => <Track key={track.id} track={track} />
 
+    const applyFilter = (filterId) => {
+        dispatch(topTracksAsyncActions.getUserTopTracksMain(filterId))
+        dispatch(topTracksActions.setCurrentFilter(filterId))
+    }
+
     const drawFilter = (filter) => {
         let cls = filter.id === currentFilter ? "filter filter-selected" : "filter"
-        return <p key={filter.id} className={cls} onClick={e => dispatch(topTracksActions.setCurrentFilter(filter.id))}>{filter.title}</p>
+        return <p key={filter.id} className={cls} onClick={e => applyFilter(filter.id)}>{filter.title}</p>
     }
 
     return <div className="top-tracks">

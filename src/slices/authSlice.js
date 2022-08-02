@@ -31,9 +31,9 @@ export const requestOptions = (headers) => {
 }
 
 const exchangeCode = createAsyncThunk(
-    "apiSlice/exchangeCode",
+    "authSlice/exchangeCode",
     async (code, { getState }) => {
-        let { redirectUri, clientId, clientSecret } = getState().api
+        let { redirectUri, clientId, clientSecret } = getState().auth
 
         let body = new URLSearchParams({
             grant_type: "authorization_code",
@@ -66,8 +66,8 @@ const exchangeCode = createAsyncThunk(
     }
 )
 
-const apiSlice = createSlice({
-    name: "apiSlice",
+const authSlice = createSlice({
+    name: "authSlice",
     initialState: {
         redirectUri: "http://localhost:3000/callback",
         clientId: "13d4952ae4e046d4bf81fb23f41a9399",
@@ -95,9 +95,7 @@ const apiSlice = createSlice({
 
 
 
-const { setToken } = apiSlice.actions
-
-
+const { setToken } = authSlice.actions
 
 export { setToken, exchangeCode }
-export default apiSlice.reducer
+export default authSlice.reducer

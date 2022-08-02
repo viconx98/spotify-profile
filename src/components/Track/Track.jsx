@@ -1,9 +1,6 @@
 import "./Track.css"
 
 export default function Track({ track }) {
-
-    console.log(track)
-    
     const parseDuration = (ms) => {
         let min = 0
         while ((ms - 60000) > 0) {

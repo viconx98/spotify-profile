@@ -1,6 +1,6 @@
 import React from 'react';
 import './Login.css';
-import { authUrl } from '../../slices/apiSlice';
+import { authUrl } from '../../slices/authSlice';
 
 
 export default function Login() {
