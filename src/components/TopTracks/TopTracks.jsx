@@ -7,6 +7,7 @@ import { useEffect } from "react"
 
 export default function TopTracks() {
     const dispatch = useDispatch()
+    
     const { topTracks, currentFilter, isLoading } = useSelector(state => state.topTracks)
 
     const filters = [
