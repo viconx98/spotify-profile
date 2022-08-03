@@ -28,6 +28,9 @@ export default function Profile() {
         }
     }, [])
 
+    console.log("artists",userTopArtists)
+    console.log("tracks" ,userTopTracks)
+
     return <div className="profile">
         {
             isLoading
@@ -59,7 +62,7 @@ export default function Profile() {
                             {
                                 userTopArtists.length === 0
                                     ? <p>You don't have any top artists</p>
-                                    : userTopTracks.map(<Artist />)
+                                    : userTopArtists.map(artist => <Artist artist={artist}/>)
                             }
                         </div>
                     </div>
@@ -75,7 +78,7 @@ export default function Profile() {
                             {
                                 userTopArtists.length === 0
                                     ? <p>You don't have any top tracks</p>
-                                    : userTopTracks.map(<Track />)
+                                    : userTopTracks.map(track => <Track track={track}/>)
                             }
                         </div>
                     </div>

@@ -7,7 +7,7 @@ import { useEffect } from "react"
 
 export default function TopTracks() {
     const dispatch = useDispatch()
-    
+
     const { topTracks, currentFilter, isLoading } = useSelector(state => state.topTracks)
 
     const filters = [
@@ -26,7 +26,7 @@ export default function TopTracks() {
     ]
 
     useEffect(() => {
-        if (topTracks === null){
+        if (topTracks === null) {
             dispatch(topTracksAsyncActions.getUserTopTracksMain())
         }
         // eslint-disable-next-line
@@ -56,12 +56,14 @@ export default function TopTracks() {
                         </div>
                     </div>
 
-                    <div className="top-tracks-list">
-                        {
-                            topTracks.length === 0
-                                ? <p> You don't have any top tracks </p>
-                                : topTracks.map(drawTrack)
-                        }
+                    <div className="wrapper">
+                        <div className="top-tracks-list">
+                            {
+                                topTracks.length === 0
+                                    ? <p> You don't have any top tracks </p>
+                                    : topTracks.map(drawTrack)
+                            }
+                        </div>
                     </div>
                 </div>
         }

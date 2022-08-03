@@ -10,23 +10,26 @@ export default function Playlists() {
     const { playlists, isLoading } = useSelector(state => state.playlist)
 
     useEffect(() => {
-        if (playlists === null){
+        if (playlists === null) {
             dispatch(playlistAsyncActions.getUserPlaylists())
         }
     }, [])
 
-    const drawPlaylist = (playlist) => <Playlist key={playlist.id} playlist={playlist}/>
+    const drawPlaylist = (playlist) => <Playlist key={playlist.id} playlist={playlist} />
 
     return <div className="playlists">
         {
             isLoading
-            ? <Loading />
-            : <div className="container">
-                <h3>Your Playlists</h3>
-                <div className="playlist-list">
-                    {playlists.map(drawPlaylist)}
+                ? <Loading />
+                : <div className="container">
+                    <h3>Your Playlists</h3>
+                    <div className="wrapper">
+                        <div className="playlist-list">
+                            {playlists.map(drawPlaylist)}
+                        </div>
+                    </div>
                 </div>
-            </div>
+
         }
     </div>
 }

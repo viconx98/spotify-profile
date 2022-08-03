@@ -26,12 +26,12 @@ export default function TopArtists() {
     ]
 
     useEffect(() => {
-        if (topArtists === null){
+        if (topArtists === null) {
             dispatch(topArtistsAsyncActions.getUserTopArtistsMain())
         }
         // eslint-disable-next-line
     }, [])
-    
+
     const applyFilter = (filterId) => {
         dispatch(topArtistsAsyncActions.getUserTopArtistsMain(filterId))
         dispatch(topArtistsActions.setCurrentFilter(filterId))
@@ -47,23 +47,25 @@ export default function TopArtists() {
     return <div className="top-artists">
         {
             isLoading
-            ? <Loading />
-            : <div className="container">
-                <div className="header">
-                    <h3>Top Artists</h3>
-                    <div className="filters">
-                        {filters.map(drawFilter)}
+                ? <Loading />
+                : <div className="container">
+                    <div className="header">
+                        <h3>Top Artists</h3>
+                        <div className="filters">
+                            {filters.map(drawFilter)}
+                        </div>
+                    </div>
+
+                    <div className="wrapper">
+                        <div className="top-artist-list">
+                            {
+                                topArtists.length === 0
+                                    ? <p> You don't have any top artists </p>
+                                    : topArtists.map(drawArtist)
+                            }
+                        </div>
                     </div>
                 </div>
-
-                <div className="top-artist-list">
-                    {
-                        topArtists.length === 0
-                            ? <p> You don't have any top artists </p>
-                            : topArtists.map(drawArtist)
-                    }
-                </div>
-            </div>
         }
     </div>
 }

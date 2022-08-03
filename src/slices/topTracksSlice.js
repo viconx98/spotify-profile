@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { requestHeaders, requestOptions } from "./authSlice"
+import { fakeTracks } from "../fakedata"
 
 
 const getUserTopTracksMain = createAsyncThunk(
@@ -45,7 +46,7 @@ const topTracksSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(getUserTopTracksMain.fulfilled, (state, action) => {
-            state.topTracks = action.payload.data
+            state.topTracks = fakeTracks //action.payload.data
             state.isLoading = false
         })
     }

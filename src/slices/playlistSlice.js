@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { requestHeaders, requestOptions } from "./authSlice"
+import { fakePlaylists } from "../fakedata"
 
 const getUserPlaylists = createAsyncThunk(
     "playlistSlice/getUserPlaylists",
@@ -41,7 +42,7 @@ const playlistSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(getUserPlaylists.fulfilled, (state, action) => {
-            state.playlists = action.payload.data
+            state.playlists = fakePlaylists//action.payload.data
             state.isLoading = false
         })
     }

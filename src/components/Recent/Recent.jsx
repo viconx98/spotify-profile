@@ -36,12 +36,14 @@ export default function Recent() {
                 ? <Loading />
                 : <div className="container">
                     <h3>Recently Played</h3>
-                    <div className="recent-track-list">
-                        {
-                            recents.length === 0
-                                ? <p>You have no recently played tracks</p>
-                                : recents.map(drawTrack)
-                        }
+                    <div className="wrapper">
+                        <div className="recent-track-list">
+                            {
+                                recents.length === 0
+                                    ? <p>You have no recently played tracks</p>
+                                    : recents.map(drawTrack)
+                            }
+                        </div>
                     </div>
                 </div>
         }
