@@ -1,21 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
-const uiSlice = createSlice({
-    name: "uiSlice",
-    initialState: {
-        selectedTab: "profile",
-        isLoading: false
-    },
-    reducers: {
-        setSelectedTab(state, action) {
-            state.selectedTab = action.payload
+let UISlice = createSlice(
+    {
+        name: 'UISlice',
+        initialState: {
+            curTab: 'profile',
         },
-        setIsLoading(state, action){
-            state.isLoading = action.payload
+        reducers: {
+            setCurTab(state, action) {
+                state.curTab = action.payload;
+            }
         }
     }
-})
-
-export const { setSelectedTab, setIsLoading } = uiSlice.actions
-
-export default uiSlice.reducer
+);
+export const { setCurTab } = UISlice.actions;
+export default UISlice.reducer;
