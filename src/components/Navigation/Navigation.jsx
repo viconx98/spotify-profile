@@ -1,3 +1,4 @@
+import { useSelector, useDispatch } from "react-redux"
 import Icons from "../Icons/Icons"
 import Tab from "../Tab/Tab"
 import "./Navigation.css"

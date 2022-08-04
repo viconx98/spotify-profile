@@ -6,7 +6,7 @@ export default function Icons({ name, height = "50px", width = "50px" }) {
 
     switch (name) {
         case "spotify":
-            return <img style={imageStyle} src="./images/logo_spotify.svg" alt="" />
+            return <img style={imageStyle} src="/images/logo_spotify.svg" alt="" />
         case "github":
             return <img style={imageStyle} src="./images/logo_github.svg" alt="" />
         case "profile":
