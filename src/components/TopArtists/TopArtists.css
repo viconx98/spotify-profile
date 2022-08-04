@@ -13,13 +13,13 @@
     display: flex;
     flex-direction: column;
     max-width: 1000px;
+    width: 1000px;
     max-height: 100%;
     padding: 16px;
 }
 
 .container > .wrapper {
     flex: 1;
-    /* overflow-y: hidden; */
 }
 
 .header {

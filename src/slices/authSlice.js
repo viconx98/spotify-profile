@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { CLIENT_ID, CLIENT_SECRET } from "../credentials"
 
 let initialToken = JSON.parse(localStorage.getItem("token")) || null
 let initialAuth = initialToken !== null
@@ -9,7 +8,7 @@ export function authUrl() {
 
     let queryParams = new URLSearchParams({
         response_type: "code",
-        client_id: CLIENT_ID,
+        client_id: "13d4952ae4e046d4bf81fb23f41a9399",
         redirect_uri: "http://localhost:3000/callback",
         scope: scopes.join(" ")
     })
@@ -71,8 +70,8 @@ const authSlice = createSlice({
     name: "authSlice",
     initialState: {
         redirectUri: "http://localhost:3000/callback",
-        clientId: CLIENT_ID,
-        clientSecret: CLIENT_SECRET,
+        clientId: "13d4952ae4e046d4bf81fb23f41a9399",
+        clientSecret: "bb9ad6e9e0c94680ac19f3dc69b19c28",
         token: initialToken,
         isAuthComplete: initialAuth
     },

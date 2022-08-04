@@ -1,8 +1,9 @@
 import "./Artist.css"
 
-export default function Artist({name, image}){
+export default function Artist({artist}){
+    console.log(artist)
     return <div className="artist">
-        <img src="./images/icon_profile.png" alt="" />
-        <p>John Doe</p>
+        <img src={artist.images[2].url} alt="" />
+        <p>{artist.name}</p>
     </div>
 }
