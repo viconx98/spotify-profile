@@ -1,64 +1,103 @@
-.profile-container {
-    padding-top: 36px;
-    width: 100%;
-    color: white;
-    display: flex;
-    justify-content: center;
-}
-
-#profile-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-}
-
 .profile {
-    width: 230px;
-    height: 230px;
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 15px;
+
+    width: 100%;
+    max-width: 100%;
+
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+
 }
 
-#profile-info {
-    color: rgb(36, 119, 60);
+.profile > .container {
     display: flex;
+    flex-direction: column;
+    align-items: center ;
+    padding: 16px;
+    max-width: 1000px;
+    min-width: 1000px;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    align-items: center;
+    gap: 24px;
+}
+
+.profile-header img {
+    height: 100px;
+    width: 100px;
+    filter: invert();
+    border: 2px solid black ;
+    padding: 16px;
+    border-radius: 100%;
+}
+
+.username {
+    font-family: "Poppins";
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 16px;
+    text-align: center;
+}
+
+.profile-stats * {
+    font-family: "Poppins";
+}
+
+.profile-stats p {
+    color: var(--color-spotify);
+    font-weight: 600;
+}
+
+.profile-stats span {
+    color: gray;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+}
+
+.tops-container {
+    display: flex;
+    width: 100%;
+    margin: 32px;
+}
+
+.top-section {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.top-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
     justify-content: space-between;
 }
 
-.profile-stat {
-    font-weight: 700;
+.top-header * {
+    font-family: "Poppins";
 }
 
-#profile-info {
-    display: flex;
-    gap: 5px;
-}
-
-#profile-info>div {
+.top-list {
+    padding: 0px 16px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
+    gap: 20px;
 }
 
-.profile-stat-name {
-    color: gray;
-    font-size: 13px;
-}
-
-#logout-button {
-    background-color: inherit;
-    color: white;
-    border: 1px solid;
-    border-radius: 30px;
-    padding: 7px 14px;
-}
-
-img {
-    height: 100%;
-    width: 100%;
+.top-list > p {
+    color: grey;
 }
