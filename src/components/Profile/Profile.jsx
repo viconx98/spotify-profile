@@ -28,9 +28,6 @@ export default function Profile() {
         }
     }, [])
 
-    console.log("artists",userTopArtists)
-    console.log("tracks" ,userTopTracks)
-
     return <div className="profile">
         {
             isLoading
