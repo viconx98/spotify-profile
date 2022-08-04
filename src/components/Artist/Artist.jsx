@@ -1,7 +1,6 @@
 import "./Artist.css"
 
 export default function Artist({artist}){
-    console.log(artist)
     return <div className="artist">
         <img src={artist.images[2].url} alt="" />
         <p>{artist.name}</p>
