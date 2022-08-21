@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-let IS_DEPLOY = true
+let IS_DEPLOY = false
 let REDIRECT_URL = IS_DEPLOY ? "https://shiny-phoenix-5585da.netlify.app/callback" : "http://localhost:3000/callback"
 
 let initialToken = JSON.parse(localStorage.getItem("token")) || null
@@ -10,7 +10,7 @@ export function authUrl() {
 
     let queryParams = new URLSearchParams({
         response_type: "code",
-        client_id: "13d4952ae4e046d4bf81fb23f41a9399",
+        client_id: "7cca2b4bab474f14b542d1b17510cacf",
         redirect_uri: REDIRECT_URL,
         scope: scopes.join(" ")
     })
@@ -72,8 +72,8 @@ const authSlice = createSlice({
     name: "authSlice",
     initialState: {
         redirectUri: REDIRECT_URL,
-        clientId: "13d4952ae4e046d4bf81fb23f41a9399",
-        clientSecret: "bb9ad6e9e0c94680ac19f3dc69b19c28",
+        clientId: "7cca2b4bab474f14b542d1b17510cacf",
+        clientSecret: "084777da3470442abadec778801bd3cd",
         token: initialToken,
         isAuthComplete: initialAuth
     },
