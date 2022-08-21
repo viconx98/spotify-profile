@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-let IS_DEPLOY = false
+let IS_DEPLOY = true
 let REDIRECT_URL = IS_DEPLOY ? "https://shiny-phoenix-5585da.netlify.app/callback" : "http://localhost:3000/callback"
 
 let initialToken = JSON.parse(localStorage.getItem("token")) || null
